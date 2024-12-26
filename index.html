@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<!-- dark classini qo'shish -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dark Mode Example</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				darkMode: 'class', // 'media' ni 'class'ga o'zgartiring
+				theme: {
+					extend: {},
+				},
+				plugins: [],
+			};
+		</script>
+	</head>
+	<body class="bg-white text-black dark:bg-gray-900 dark:text-white">
+		<h1 class="text-3xl font-bold">Dark Mode & Light Mode Example</h1>
+		<button id="toggle" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Toggle Dark Mode</button>
+
+		<script>
+			// Foydalanuvchi holatini localStorage'dan o'qish va saqlash
+			const toggleButton = document.getElementById('toggle');
+
+			// Sahifa yuklanganda avvalgi holatni tekshirish va tiklash
+			const currentMode = localStorage.getItem('theme');
+			if (currentMode === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+
+			// Dark mode-ni o'zgartirish va localStorage'ga saqlash
+			toggleButton.addEventListener('click', () => {
+				document.documentElement.classList.toggle('dark');
+
+				// Agar dark mode faollashtirilgan bo'lsa, 'dark' ni saqlash
+				if (document.documentElement.classList.contains('dark')) {
+					localStorage.setItem('theme', 'dark');
+				} else {
+					localStorage.setItem('theme', 'light');
+				}
+			});
+		</script>
+	</body>
+</html>
